@@ -1,4 +1,4 @@
-import Header from "../../Components/Header/Header";
+import Header from "../../../Components/Header/Header";
 import style from "../HomePage/style.module.scss";
 
 function HomePage() {

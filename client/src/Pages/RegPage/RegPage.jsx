@@ -1,9 +1,21 @@
-import Header from "../../Components/Header/Header";
+import Header from "../../../Components/Header/Header";
 import style from "../RegPage/style.module.scss";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import axios from 'axios'
+import { useState } from "react";
 
 function RegPage() {
+  const [data, setData] = useState({})
+
+  function changeState(e) {
+    setData({ ...data, [e.target.name]: e.target.value})
+  }
+
+ async function sendARequest(){
+  const response = await axios.post("http://localhost:3000/user", data)
+  console.log(response);
+ }
   return (
     <>
       <Header></Header>
@@ -16,41 +28,46 @@ function RegPage() {
         </p>
 
         <div className={style.name}>
-          <TextField
+          <TextField onChange={changeState}
             style={{ width: "100%" }}
             id="outlined-basic"
-            label="Your name"
+            label="Name"
+            name="name"
             variant="outlined"
           />
-          <TextField
+          <TextField onChange={changeState}
             style={{ width: "100%" }}
             id="outlined-basic"
-            label="Your surname"
+            label="Surname"
+            name="surname"
             variant="outlined"
           />
         </div>
         <div>
-          <TextField
+          <TextField onChange={changeState}
             style={{ width: "100%" }}
             id="outlined-basic"
             label="Your email"
+            name="email" 
             variant="outlined"
           />
         </div>
         <div>
-          <TextField
+          <TextField onChange={changeState}
             style={{ width: "100%" }}
             id="outlined-basic"
             label="Must be at least 8 characters."
+            name="password" 
             variant="outlined"
           />
         </div>
-        <Button
+        <Button onClick={sendARequest}
           style={{ width: "15%", marginLeft: "auto" }}
           variant="contained"
         >
           Continue
         </Button>
+        
         <div className={style.sign_up}>
           <p style={{ textAlign: "end" }}>Not registered yet? Sign Up</p>
         </div>
